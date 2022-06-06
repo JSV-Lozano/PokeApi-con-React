@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  justify-content: center;
+}
+.imgPoke {
+  width: 200px;
+}
+.fav-button {
+  border: none;
+}

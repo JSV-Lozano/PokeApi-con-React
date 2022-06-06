@@ -1,0 +1,168 @@
+h1 {
+  text-align: center;
+}
+.container-pokedex {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+}
+.poke {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+.container-cards h2 {
+  margin-bottom: 5px;
+}
+
+.container-cards {
+  text-align: center;
+  border-radius: 3px;
+  padding: 10px;
+  height: 220px;
+}
+.types {
+  width: 100%;
+}
+.types p {
+  width: 100%;
+  margin-bottom: 5px;
+  border-radius: 5px 0 5px 0;
+  font-size: 1.4rem;
+}
+.button-fav {
+  border: none;
+}
+
+/* Extra Background Colors */
+.grass {
+  background-color: rgb(38, 235, 90);
+}
+
+.fire {
+  background-color: rgb(235, 71, 38);
+}
+
+.water {
+  background-color: rgb(38, 186, 235);
+}
+
+.electric {
+  background-color: rgb(235, 209, 38);
+}
+
+.ice {
+  background-color: rgb(38, 219, 235);
+}
+
+.fighting {
+  background-color: rgb(235, 104, 38);
+}
+
+.poison {
+  background-color: rgb(176, 38, 235);
+}
+.ground {
+  background-color: rgb(181, 131, 92);
+}
+
+.flying {
+  background-color: rgb(161, 215, 230);
+}
+
+.psychic {
+  background-color: rgb(219, 77, 207);
+}
+
+.ghost {
+  background-color: rgb(131, 24, 133);
+}
+
+.bug {
+  background-color: rgb(113, 209, 10);
+}
+
+.rock {
+  background-color: rgb(166, 87, 8);
+}
+
+.dragon {
+  background-color: rgb(50, 24, 217);
+}
+
+.normal {
+  background-color: rgb(168, 162, 157);
+}
+
+.fairy {
+  background-color: rgb(255, 148, 191);
+}
+.center {
+  margin: 0 auto;
+  width: 60%;
+  margin-bottom: 10px;
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+/* .pokedex {
+  text-align: center;
+}
+.container-pokedex {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #c90000;
+}
+.poke {
+ 
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 0.4fr));
+  grid-gap: 2rem;
+  margin-left: 40px;
+}
+
+.poke-card {
+  width: 300px;
+  height: 180px;
+  border-color: #000000;
+  border-style: solid;
+  overflow: hidden;
+}
+.poke-Center {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+.poke-Img {
+  width: 100px;
+}
+.poke-Class {
+  margin-bottom: 100px;
+}
+.poke-Info {
+  display: none;
+}
+.poke-Info img {
+  width: 150px;
+  height: 140px;
+}
+@media only screen and (min-width: 768px) and (max-width: 1440px) {
+  .poke-Info {
+    right: -100px;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .poke-Info {
+    display: none;
+  }
+}
+ */

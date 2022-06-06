@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+  font-family: "Concert One", cursive;
+  font-family: "Luxurious Roman", cursive;
+  color: rgb(0, 0, 0);
+}

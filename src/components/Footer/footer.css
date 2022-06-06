@@ -1,0 +1,10 @@
+.footer {
+  display: flex;
+  height: 50px;
+  background-color: #a70000;
+  justify-content: center;
+  align-items: center;
+}
+.container-footer span {
+  color: #fff;
+}
