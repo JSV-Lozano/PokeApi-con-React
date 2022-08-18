@@ -64,13 +64,13 @@ function Pokedex() {
         <input
           type="search"
           placeholder="Buscar pokemon"
-          value={"" || searchPokemons.name }
+          value={"" || searchPokemons.name}
           onChange={(e) => setSearchPokemons(e.target.value)}
           id="name_field"
           className="nes-input"
         />
         <button
-          type="button"
+          type="submit"
           className="nes-btn is-success"
           onClick={handleSearch}
         >
