@@ -1,15 +1,24 @@
 import React from "react";
 import { PokeCards } from "./PokeCards";
 import { pokeContext } from "../context/context";
-import { Modal } from "../Modal";
-import { PokeInfo } from "./PokeInfo";
+import { Loader } from "../Loader";
 import "./pokedex.css";
 function Pokedex() {
   const [dataPoke, setDataPoke] = React.useState();
-  const [modal, setModal] = React.useState(false);
-  const { setPokemons, pokemons, nextUrl, prevUrl, setUrl, state } =
-    React.useContext(pokeContext);
-  const fav = state.fav;
+  const [isSearch, setIsSearch] = React.useState(false);
+  const {
+    setPokemons,
+    pokemons,
+    nextUrl,
+    prevUrl,
+    setUrl,
+    searchPokemons,
+    setSearchPokemons,
+    setLoading,
+    loading,
+    url,
+  } = React.useContext(pokeContext);
+
   const pokeUrlNext = () => {
     setPokemons([]);
     setUrl(nextUrl);
@@ -19,60 +28,125 @@ function Pokedex() {
     setUrl(prevUrl);
   };
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (searchPokemons === "") {
+      setIsSearch(false);
+      setSearchPokemons("");
+      console.log(loading, url, searchPokemons);
+    } else {
+      try {
+        const resp = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${searchPokemons}`
+        );
+        const data = await resp.json();
+        setIsSearch(true);
+        setSearchPokemons(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    console.log(searchPokemons);
+    setLoading(false);
+  };
+  const returnAListPoke = () => {
+    setIsSearch(false);
+    setSearchPokemons("");
+    document.querySelector(".nes-input").value = "";
+  };
+
   return (
     <>
       <h1 className="pokedex">Pokedex</h1>
-      <div className="container-pokedex">
-        {pokemons.map((pokemon) => (
-          <PokeCards
-            pokemon={pokemon}
-            infoPoke={(data) => setDataPoke(data)}
-            setModal={setModal}
-            modal={modal}
-            fav={fav}
-            key={pokemon.name}
-          />
-        ))}
-      </div>
-      {!!modal && (
-        <Modal>
-          <PokeInfo data={dataPoke} setModal={setModal} />
-        </Modal>
+      <form>
+        <input
+          type="search"
+          placeholder="Buscar pokemon"
+          value={"" || searchPokemons.name }
+          onChange={(e) => setSearchPokemons(e.target.value)}
+          id="name_field"
+          className="nes-input"
+        />
+        <button
+          type="button"
+          className="nes-btn is-success"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+      </form>
+      {isSearch ? (
+        <>
+          <button
+            type="button"
+            className="nes-btn is-primary"
+            onClick={returnAListPoke}
+          >
+            Volver
+          </button>
+          <div className="poke">
+            <div className="container-cards" key={searchPokemons.name}>
+              <h2>{searchPokemons.name} </h2>
+              <p>#{searchPokemons.id} </p>
+              <img
+                src={searchPokemons.sprites.front_default}
+                alt="Pokemon.img"
+              />
+              <div className="types">
+                {searchPokemons.types.map((data) => (
+                  <p className={data.type.name} key={data.type.name}>
+                    {data.type.name}{" "}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="container-pokedex">
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                {pokemons.map((pokemon) => (
+                  <PokeCards
+                    pokemon={pokemon}
+                    infoPoke={(data) => setDataPoke(data)}
+                    key={pokemon.name}
+                  />
+                ))}
+              </>
+            )}
+          </div>
+          <div className="center">
+            <div className="pagination">
+              {prevUrl && (
+                <button
+                  type="button"
+                  className="nes-btn is-primary"
+                  onClick={pokeUrlPrev}
+                >
+                  antes
+                </button>
+              )}
+              {nextUrl && (
+                <button
+                  type="button"
+                  className="nes-btn is-primary"
+                  onClick={pokeUrlNext}
+                >
+                  siguiente
+                </button>
+              )}
+            </div>
+          </div>
+        </>
       )}
-
-      <div className="center">
-        <div className="pagination">
-          {prevUrl && <button onClick={pokeUrlPrev}>antes</button>}
-          {nextUrl && <button onClick={pokeUrlNext}>siguiente</button>}
-        </div>
-      </div>
     </>
   );
 }
 
 export { Pokedex };
-
-/*  const [pokemons, setPokemons] = React.useState([]);
-  const [page, setPage] = useState(0);
-  Obtenemos los datos de las url de los pokemonso y por cada
-uno de ellos creamos un array con su informacion
-  const fetchPokemons = async () => {
-    try {
-      const data = await getPokemons();
-      setNextUrl(data.next);
-      setPrevUrl(data.previous);
-      const promisesData = data.results.map(async (pokemon) => {
-        return await getPokemonsData(pokemon.url);
-      });
-      const result = await Promise.all(promisesData);
-      setPokemons(result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(pokemons);
-
-  React.useEffect(() => {
-    fetchPokemons();
-  }, []);
- */
